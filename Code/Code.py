@@ -195,7 +195,7 @@ def mptcpConnection(h1,h2,file):
     # str=h1.cmd('iperf -c', h2.IP(), '-t 50')
     # file.write(str)
 def tcpConnection(h3,h4,file):
-    time.sleep(10.0)
+    sleep(10.0)
     h3String = h3.cmd('iperf -c ' + h4.IP() + " -t 20 ")
     print(h3String)
     file.write(h3String)
@@ -207,8 +207,8 @@ if '__main__' == __name__:
     parser.add_option("--mode", dest="mode", default=1)
     (options, args) = parser.parse_args()
 
-    h2file = open('resultH2-' + options.bdelay + '-mode' + options.mode + '.txt', 'w')
-    h4file = open('resultH4-' + options.bdelay + '-mode' + options.mode + '.txt', 'w')
+    h2file = open('resultH2-' + options.bdelay + '-mode' + str(options.mode) + '.txt', 'w')
+    h4file = open('resultH4-' + options.bdelay + '-mode' + str(options.mode) + '.txt', 'w')
 
 
     for i in range(20): #20
