@@ -204,17 +204,18 @@ def tcpConnection(h3,h4,file):
 if '__main__' == __name__:
     parser = OptionParser()
     parser.add_option("--bdelay", dest="bdelay", default="20ms")
+    parser.add_option("--mode", dest="mode", default=1)
     (options, args) = parser.parse_args()
 
-    h2file = open('resultH2-' + options.bdelay + '.txt', 'a')
-    h4file = open('resultH4-' + options.bdelay + '.txt', 'a')
+    h2file = open('resultH2-' + options.bdelay + '-mode' + options.mode + '.txt', 'w')
+    h4file = open('resultH4-' + options.bdelay + '-mode' + options.mode + '.txt', 'w')
 
 
-    for i in range(1): #20
+    for i in range(20): #20
         print("Starting test number :" + str(i+1))
         setLogLevel('info')
         net = Mininet(topo=MPTopo(Adelay="20ms",Bdelay=options.bdelay), link=TCLink)
-        setupCongestionControll()
+        setupCongestionControll(int(options.mode))
         net.start()
         h1 = net.get('h1')
         h2 = net.get('h2')
